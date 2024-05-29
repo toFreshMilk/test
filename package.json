@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./server.js",
+    "test1": "nodemon test1.js",
+    "test2": "nodemon test2.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

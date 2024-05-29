@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <title>Video Streaming</title>
+</head>
+<body>
+<video id="videoPlayer" controls autoplay>
+    <source src="http://localhost:3000/video" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<div id="delayDisplay"></div>
+
+<script>
+    const video = document.getElementById('videoPlayer');
+    const delayDisplay = document.getElementById('delayDisplay');
+    let startTime = null;
+
+    video.addEventListener('loadedmetadata', function() {
+        startTime = performance.now();
+        console.log(startTime)
+    });
+
+    video.addEventListener('timeupdate', function() {
+        console.log('timeupdate')
+        if(startTime !== null) {
+            const elapsedTime = performance.now() - startTime;
+            const buffered = video.buffered;
+            let bufferedTime = 0;
+            for(let i = 0; i < buffered.length; i++) {
+                bufferedTime = Math.max(bufferedTime, buffered.end(i));
+            }
+            const delay = Math.round((elapsedTime - bufferedTime * 1000) / 1000); // 밀리초를 초로 변환하고 정수로 변환
+            delayDisplay.innerText = `Delay: ${delay} seconds`; // 초 단위로 표기
+        }
+    });
+</script>
+</body>
+</html>
