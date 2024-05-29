@@ -9,6 +9,8 @@ app.get('/video', (req, res) => {
     const outputFilePath = 'output.mp4';
     const inputFilePath = 'zi.mp4';
     const resolution = '640x360';
+
+    //chocolate install ffmpeg
     const ffmpegProcess = spawn('ffmpeg', ['-i', inputFilePath, '-vf', `scale=${resolution}`, outputFilePath]);
 
     ffmpegProcess.on('close', (code) => {

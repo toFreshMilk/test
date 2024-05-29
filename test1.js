@@ -17,6 +17,6 @@ function countZeroOne(n) {
 
     fibonacci(n);
 
-    return count;
+    return count[0] + ', ' + count[1];
 }
 console.log(countZeroOne(10))
